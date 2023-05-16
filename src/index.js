@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import Botao from './Botao.js';
-import CaixaTexto from './CaixaTexto.js';
+import Swal from 'sweetalert2'
+
+import Botao from './components/botao/Botao.jsx';
+import CaixaTexto from './components/caixatexto/CaixaTexto.jsx';
 import Selecao from './components/selecao/selecao.jsx';
 import Checkbox from './components/checkbox/checkbox.jsx';
 import Radio from './components/radio/radio.jsx';
@@ -11,7 +13,14 @@ function App() {
   const [texto, setTexto] = useState('');
 
   const handleClick = () => {
-    alert("Você confirma os dados?")
+    Swal.fire({
+      title: 'Dados enviados com sucesso!',
+      text: 'Continuar',
+      icon: 'success',
+      confirmButtonText: 'Ok'
+    }).then(() => {
+      window.location.reload();
+    })
     setShowHello(true);
   };
 
@@ -20,27 +29,27 @@ function App() {
   };
 
   return (
-    <div className='container'>
-      <h2>Preencha os dados abaixo:</h2>
+    <div className='container' style={{margin:"10px", borderRadius: "15px", backgroundColor: "#39ad92"}} >
+      <h2 className='display-6'>Preencha os dados abaixo:</h2>
       <br />
-    <div className='me-2 d-inline-block' >Nome:</div>
+      <div className='me-2 d-inline-block lead' >Nome:</div>
       <CaixaTexto
         placeholder="Digite seu nome"
         value={texto}
         onChange={handleTextoChange}
       />
       <br /><br />
-      <div>Genero:</div>
-      <Selecao/>
+      <div className="lead">Genero:</div>
+      <Selecao />
       <br />
-      <div>Dias que tem aula:</div>
-      <Checkbox/>
+      <div className="lead">Dias que tem aula:</div>
+      <Checkbox />
       <br />
-      <div>Curso:</div>
-      <Radio/>
+      <div className="lead">Curso:</div>
+      <Radio />
       <br />
       <Botao onClick={handleClick} label="Enviar" />
-      {showHello && <h2><br />Dados enviados com sucesso!</h2>}
+      {showHello}
     </div>
   );
 }
