@@ -2,6 +2,8 @@
 ```bash
   git clone https://github.com/lucasSteffenM/AP2-Componentes
   
+  npm install sweetalert2
+  
   npm i
   
   npm start
